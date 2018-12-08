@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class CourseControllers {
+public class CourseController {
 
     @Autowired
     CoursesRepository coursesRepository;
