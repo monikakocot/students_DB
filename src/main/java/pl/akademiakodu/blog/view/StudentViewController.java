@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import pl.akademiakodu.blog.Repositories.StudentRepository;
 import pl.akademiakodu.blog.controllers.StudentController;
+import pl.akademiakodu.blog.model.Courses;
 import pl.akademiakodu.blog.model.LoginForm;
 import pl.akademiakodu.blog.model.Student;
 import pl.akademiakodu.blog.model.StudentDetails;
@@ -68,7 +69,27 @@ public class StudentViewController {
         return "students/studentDetails";
     }
 
+    @GetMapping("/students/{idStudent}")
+    public String showCourses (@PathVariable Long idStudent,
+                               ModelMap modelMap,Student student){
 
+         modelMap.addAttribute("coursesList",studentController.showCoursesOfStudent(idStudent));
+
+         modelMap.addAttribute("students", studentController.getAllStudents());
+         return "students/studentCourses";
+    }
+
+    // co ciekawe z @PathVariable zamiast @RequestParam nie działa
+    @PostMapping("/student/addCourse")
+    public String addCourseToStudent(@RequestParam Long idStudent,
+                                     @RequestParam Long idCourse,
+                                     Courses course,
+                                     ModelMap modelMap){
+
+        studentController.addCourseToStudent(idStudent,idCourse,course);
+        modelMap.addAttribute("coursesList",studentController.showCoursesOfStudent(idStudent));
+        return "students/studentCourses";
+    }
 
 }
 

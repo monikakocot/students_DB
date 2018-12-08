@@ -18,6 +18,7 @@
             <th>Email: </th>
             <th>LastName: </th>
             <th>PhoneNumber: </th>
+            <th>Display Courses: </th>
         </tr>
         <tr th:each="list : ${students}">
             <td th:text="${list.id}"/>
@@ -25,6 +26,9 @@
             <td th:text="${list.email}"/>
             <td th:text="${list.getLastname()}"/>
             <td th:text="${list.getPhoneNumber()}"/>
+            <td> <a th:href="@{'/students/' +${list.id}  }">Courses</a>
+            </td>
+
         </tr>
     </table>
 </div>
@@ -67,7 +71,8 @@
         <br>
         <button th:type="submit">Add</button>
     </form>
-
 </div>
+
+
 </body>
 </html>

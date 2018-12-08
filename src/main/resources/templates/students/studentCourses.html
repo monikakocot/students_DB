@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ACADEMIC DATA BASE</title>
+</head>
+<body>
+
+<h1>Courses of student: </h1>
+<p th:text="${coursesList}"/>
+
+
+<div>
+    <h1> Add course to Student:</h1>
+
+    <form th:action="@{/student/addCourse}" method="post" >
+
+        <input type="number" th:name="idStudent" placeholder="idStudent">
+        <br>
+        <input type="number" th:name="idCourse" placeholder="idCourse">
+        <br>
+        <button th:type="submit">Add Course</button>
+    </form>
+
+</div>
+
+</body>
+</html>

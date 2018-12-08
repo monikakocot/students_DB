@@ -67,12 +67,24 @@ public class StudentController {
     @Autowired
     CoursesRepository coursesRepository;
 
+    @GetMapping("/students/{idStudent}")
+    public List<Courses> showCoursesOfStudent (@PathVariable Long idStudent){
+
+        Optional<Student> studentOptional = studentRepository.findById(idStudent);
+        //Optional<Courses> courseOptional = coursesRepository.findById(idStudent);
+
+            List<Courses> courseList = studentOptional.get().getCourses();
+
+        return courseList;
+    }
+
     @GetMapping("/students/{idStudent}/course/{idCourse}")
     public String addCourseToStudent(
             @PathVariable Long idStudent,
             @PathVariable Long idCourse,
             //   @ModelAttribute Student student,
-            @ModelAttribute Courses courses) {
+            @ModelAttribute Courses courses
+    ){
         Optional<Student> studentOptional = studentRepository.findById(idStudent);
         Optional<Courses> courseOptional = coursesRepository.findById(idCourse);
         studentOptional.ifPresent(result -> {
@@ -87,6 +99,7 @@ public class StudentController {
             studentRepository.save(result);
         });
         return "Student id: " + idStudent + " has new Course: " + idCourse;
+
     }
 
 
