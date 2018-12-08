@@ -8,6 +8,7 @@ import pl.akademiakodu.blog.Repositories.StudentRepository;
 import pl.akademiakodu.blog.controllers.StudentController;
 import pl.akademiakodu.blog.model.LoginForm;
 import pl.akademiakodu.blog.model.Student;
+import pl.akademiakodu.blog.model.StudentDetails;
 
 import java.util.Optional;
 
@@ -55,6 +56,19 @@ public class StudentViewController {
         modelMap.addAttribute("students", studentController.getAllStudents());
         return "students/studentDetails";
     }
+
+    @PostMapping("/add/student")
+    public String addStudent (@ModelAttribute Student student,
+                              @ModelAttribute StudentDetails studentDetails,
+                                 ModelMap modelMap){
+
+        modelMap.addAttribute("newStudent", studentController.addNewStudent(student,studentDetails));
+
+        modelMap.addAttribute("students", studentController.getAllStudents());
+        return "students/studentDetails";
+    }
+
+
 
 }
 

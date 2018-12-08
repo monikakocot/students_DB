@@ -32,30 +32,42 @@
 <div>
     <h1> Edit Student's PhoneNumber:</h1>
 
-    <form th:action="@{/update/student/phonenumber}" method="post">
-
+    <form th:action="@{/update/student/phonenumber}" method="post" >
         <input type="number" th:name="id" placeholder="student id:">
         <br>
         <input type="text" th:name="phoneNumber" placeholder="new phone number">
         <br>
         <button th:type="submit">Update</button>
-
     </form>
 
 </div>
 
 <div>
-    <h1> Deleete Student:</h1>
+    <h1> Delete Student:</h1>
 
     <form th:action="@{/delete/student}" method="post">
-
         <input type="number" th:name="id" placeholder="student id:">
         <br>
         <button th:type="submit">Delete</button>
-
     </form>
 
 </div>
+<div>
+    <h1> Add new Student:</h1>
 
+    <form th:action="@{/add/student}" method="post" th:object="${student}">
+
+        <input type="text" th:name="name" placeholder="name of student">
+        <br>
+        <input type="text" th:name="email" placeholder="email of student">
+        <br>
+        <input type="text" th:name="lastname" placeholder="lastname of student">
+        <br>
+        <input type="text" th:name="phoneNumber" placeholder="phoneNumber of student">
+        <br>
+        <button th:type="submit">Add</button>
+    </form>
+
+</div>
 </body>
 </html>
