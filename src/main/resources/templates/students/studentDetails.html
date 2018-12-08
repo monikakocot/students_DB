@@ -6,8 +6,56 @@
 </head>
 <body>
 
+<div>
+    <h1> List of students:</h1>
+</div>
 
-Yo soy solo pa ti mi amor !
+<div>
+    <table>
+        <tr>
+            <th>Id: </th>
+            <th>Name: </th>
+            <th>Email: </th>
+            <th>LastName: </th>
+            <th>PhoneNumber: </th>
+        </tr>
+        <tr th:each="list : ${students}">
+            <td th:text="${list.id}"/>
+            <td th:text="${list.name}"/>
+            <td th:text="${list.email}"/>
+            <td th:text="${list.getLastname()}"/>
+            <td th:text="${list.getPhoneNumber()}"/>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <h1> Edit Student's PhoneNumber:</h1>
+
+    <form th:action="@{/update/student/phonenumber}" method="post">
+
+        <input type="number" th:name="id" placeholder="student id:">
+        <br>
+        <input type="text" th:name="phoneNumber" placeholder="new phone number">
+        <br>
+        <button th:type="submit">Update</button>
+
+    </form>
+
+</div>
+
+<div>
+    <h1> Deleete Student:</h1>
+
+    <form th:action="@{/delete/student}" method="post">
+
+        <input type="number" th:name="id" placeholder="student id:">
+        <br>
+        <button th:type="submit">Delete</button>
+
+    </form>
+
+</div>
 
 </body>
 </html>

@@ -50,6 +50,13 @@ public class Student {
         this.studentDetails = studentDetails;
     }
 
+    // Methods for StudentViewController
+    public String getLastname(){
+        return studentDetails.getLastname();
+    }
+    public String getPhoneNumber(){
+        return studentDetails.getPhoneNumber();
+    }
 
 
     //CONSTRUCTORS, GETTERS,SETTERS

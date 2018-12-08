@@ -22,25 +22,19 @@ public class StudentViewController {
 
 
     @PostMapping ("/login")
-    public String login (@ModelAttribute LoginForm loginForm) {
+    public String login (@ModelAttribute LoginForm loginForm, ModelMap modelMap, Student student) {
 
         if (loginForm.getLogin().equals("admin") && loginForm.getPassword().equals("admin")){
+            modelMap.addAttribute("students", studentController.getAllStudents());
             return "students/studentDetails";
         }
         return "students/students";
     }
 
-
-// DOPRACOWAC POŹNIEJ
-    @GetMapping("/update/student/phonenumber")
-    public String updatePhoneNumber(){
-        return "students/updatedStudent";
-    }
-
-    @ResponseBody
     @PostMapping("/update/student/phonenumber")
     public String updatedPhoneNumber(@RequestParam Long id,
-                                     @RequestParam String phoneNumber){
+                                     @RequestParam String phoneNumber,
+                                     ModelMap modelMap, Student student){
 
         Optional<Student> studentOptional = studentRepository.findById(id);
         studentOptional.ifPresent(result ->{
@@ -49,8 +43,18 @@ public class StudentViewController {
             result.getStudentDetails().setPhoneNumber(phoneNumber);
             studentRepository.save(result);
         });
-        return "updatedStudent";
-
+        modelMap.addAttribute("students", studentController.getAllStudents());
+        return "students/studentDetails";
     }
-// DOPRACOWAC POŹNIEJ
+
+    @PostMapping("/delete/student")
+    public String deleteStudent (@RequestParam Long id,
+                                 ModelMap modelMap, Student student){
+
+        studentController.deleteStudent(id);
+        modelMap.addAttribute("students", studentController.getAllStudents());
+        return "students/studentDetails";
+    }
+
 }
+
