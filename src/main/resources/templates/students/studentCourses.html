@@ -9,6 +9,7 @@
 <h1>Courses of student: </h1>
 <p th:text="${coursesList}"/>
 
+<h3 th:each="list : ${courses}" th:text="${list.title}"></h3>
 
 <div>
     <h1> Add course to Student:</h1>

@@ -71,6 +71,14 @@ public class Courses {
         this.instructor = instructor;
     }
 
+    // Methods for CourseViewController
+    public String getDescription(){
+        return courseDescription.getDescription();
+    }
+
+
+
+
 /* ZAKOMENTOWANE W WERSJI LUKASZA
     // this for @ManyToMany
    // private List<Instructor> instructor;

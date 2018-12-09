@@ -4,31 +4,28 @@
     <meta charset="UTF-8">
     <title>ACADEMIC DATA BASE</title>
 </head>
-
 <body>
 
 <div>
-<h1> List of students:</h1>
+    <h1> List of Courses:</h1>
+    <h3 th:each="list : ${courses}" th:text="${list.title}"></h3>
 </div>
 
 <div>
-<table>
-    <tr>
-        <th>Name of Students:</th>
-    </tr>
-    <tr th:each="list : ${students}">
-        <td th:text="${list.name}"/>
-    </tr>
-</table>
+
+<a href="/courses/details">Display more information about courses</a>
+    <h5>Docelowo formularz logowania aby mieć dostęp !!!</h5>
 </div>
 
+<!-- DOESNT WORK TO REDOLVE
 <div>
-    <form th:action="@{/login}" th:method="post" th:object="${loginForm}">
+    <form th:action="@{/loginCourses}" th:method="post" th:object="${loginForm}">
         Login: <input type="text" th:field="*{login}">  <br/>
         Hasło: <input type="password" th:field="*{password}"> <br/>
         <input type="submit" value="LogIn!">
     </form>
 </div>
+-->
 
 </body>
 </html>

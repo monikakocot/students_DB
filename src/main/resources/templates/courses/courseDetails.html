@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ACADEMIC DATA BASE</title>
+</head>
+
+<body>
+
+<div>
+    <h1> Details information about courses:</h1>
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th>Id: </th>
+            <th>Title: </th>
+            <th>Level: </th>
+            <th>Description: </th>
+            <th>Instructor: </th>
+
+        </tr>
+        <tr th:each="list : ${courses}">
+            <td th:text="${list.id}"/>
+            <td th:text="${list.title}"/>
+            <td th:text="${list.level}"/>
+            <td th:text="${list.getDescription()}"/>
+            <td th:text="${list.getInstructor().getName()}"/>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

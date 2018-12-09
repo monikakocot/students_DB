@@ -46,7 +46,7 @@ The new approach makes it possible to shorten this simply to:
     @GetMapping("/courses/all")
     public String allCourses(ModelMap modelMap, Courses courses){
         modelMap.addAttribute("courses", courseController.getAllCourses());
-        return "courses";
+        return "courses/courses";
     }
     @GetMapping("/instructors/all")
     public String allInstructors (ModelMap modelMap, Instructor instructor){
