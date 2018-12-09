@@ -3,17 +3,10 @@ package pl.akademiakodu.blog.view;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.akademiakodu.blog.Repositories.CoursesRepository;
 import pl.akademiakodu.blog.controllers.CourseController;
-import pl.akademiakodu.blog.model.Courses;
-
-import pl.akademiakodu.blog.model.LoginForm;
-import pl.akademiakodu.blog.model.LoginFormCourses;
-
+import pl.akademiakodu.blog.model.*;
 
 
 @Controller
@@ -42,4 +35,35 @@ public class CourseViewController {
         return "courses/courseDetails";
 
     }
+    @PostMapping("/delete/course")
+    public String deleteSCourse (@RequestParam Long id,
+                                 ModelMap modelMap, Courses course){
+
+        courseController.deleteCourseById(id);
+        modelMap.addAttribute("courses", courseController.getAllCourses());
+        return "courses/courseDetails";
+    }
+
+    @PostMapping("/add/course")
+    public String addStudent (@ModelAttribute Courses course,
+                              @ModelAttribute CourseDescription courseDescription,
+                              ModelMap modelMap){
+
+        modelMap.addAttribute("newCourse", courseController.addNewCourseWithDescription(course,courseDescription));
+
+        modelMap.addAttribute("courses", courseController.getAllCourses());
+        return "courses/courseDetails";
+    }
+
+    @GetMapping("/courses/{idCourse}")
+    public String showInstructor (@PathVariable Long idCourse,
+                               ModelMap modelMap,Courses courses){
+
+        //DODAC OBSLUGE ZE GDY NIE MA INSTRUKTORA TO WYSWIETLA INFORMACJĘ O KONIECZNOSCI DODANIA GO
+        modelMap.addAttribute("instructor",courseController.showInsstructorOfCourse(idCourse));
+
+        modelMap.addAttribute("courses", courseController.getAllCourses());
+        return "courses/courseInstructor";
+    }
+
 }

@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.akademiakodu.blog.Repositories.CoursesRepository;
 import pl.akademiakodu.blog.Repositories.InstructorRepository;
-import pl.akademiakodu.blog.model.CourseDescription;
-import pl.akademiakodu.blog.model.Courses;
-import pl.akademiakodu.blog.model.Instructor;
+import pl.akademiakodu.blog.model.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +29,9 @@ public class CourseController {
 
     //WERSJA LUKASZA
     @PostMapping("courses/add/desc")
-    public Courses addNewCourseWithDescription(@ModelAttribute Courses course, @ModelAttribute CourseDescription courseDescription) {
+    public Courses addNewCourseWithDescription(@ModelAttribute Courses course,CourseDescription courseDescription) {
+
+        CourseDescription cd = new CourseDescription();
         Courses result = new Courses(
                 course.getTitle(),
                 course.getLevel(),
@@ -87,6 +87,17 @@ public class CourseController {
         return "Instructor added to course!";
 
     }
+
+    @GetMapping("/courses/{idCourse}")
+    public Instructor showInsstructorOfCourse (@PathVariable Long idCourse){
+
+        Optional<Courses> courseOptional = coursesRepository.findById(idCourse);
+
+        Instructor instructor = courseOptional.get().getInstructor();
+
+        return instructor;
+    }
+
 //KOD1
 
 /*// check if it is working // ZAKOMENTOWANE W WERSJI LUKASZA

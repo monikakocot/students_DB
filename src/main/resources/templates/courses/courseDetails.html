@@ -18,7 +18,7 @@
             <th>Title: </th>
             <th>Level: </th>
             <th>Description: </th>
-            <th>Instructor: </th>
+            <th>Display Instructor: </th>
 
         </tr>
         <tr th:each="list : ${courses}">
@@ -26,9 +26,36 @@
             <td th:text="${list.title}"/>
             <td th:text="${list.level}"/>
             <td th:text="${list.getDescription()}"/>
-            <td th:text="${list.getInstructor().getName()}"/>
+            <!--<td th:text="${list.getInstructor().getName()}"/>-->
+            <td> <a th:href="@{'/courses/' +${list.id}  }">Instructors</a>
+            </td>
         </tr>
     </table>
+</div>
+
+<div>
+    <h1> Delete Course:</h1>
+
+    <form th:action="@{/delete/course}" method="post">
+        <input type="number" th:name="id" placeholder="course id:">
+        <br>
+        <button th:type="submit">Delete</button>
+    </form>
+
+</div>
+<div>
+    <h1> Add new Course:</h1>
+
+    <form th:action="@{/add/course}" method="post" th:object="${courses}">
+
+        <input type="text" th:name="title" placeholder="title od course">
+        <br>
+        <input type="text" th:name="level" placeholder="level of course">
+        <br>
+        <input type="text" th:name="description" placeholder="description of course">
+        <br>
+        <button th:type="submit">Add</button>
+    </form>
 </div>
 
 </body>
