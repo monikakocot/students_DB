@@ -8,9 +8,21 @@
 
 <h1>Instructor of the Course: </h1>
 
-<h3 th:text="${instructor.name}"></h3>
+<h3 th:if="${instructor} != null" th:text="${instructor.name}"></h3>
+<div th:if="${instructor} == null">
 
-<!-- DODAC OBSLUGE ZE GDY NIE MA INSTRUKTORA TO WYSWIETLA INFORMACJĘ O KONIECZNOSCI DODANIA GO-->
+    <h4> The course has not have a Instructor :(</h4>
+
+    <form th:action="@{/course/addInstructor}" method="post" >
+
+        <input type="number" th:name="idCourse" placeholder="idCourse">
+        <br>
+        <input type="number" th:name="idInstructor" placeholder="idInstructor">
+        <br>
+        <button th:type="submit">Add Instructor</button>
+    </form>
+
+</div>
 
 </body>
 </html>

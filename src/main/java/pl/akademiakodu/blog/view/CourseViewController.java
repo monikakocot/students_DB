@@ -66,4 +66,16 @@ public class CourseViewController {
         return "courses/courseInstructor";
     }
 
+    // co ciekawe z @PathVariable zamiast @RequestParam nie działa
+    @PostMapping("/course/addInstructor")
+    public String addInstructorToCourse (@RequestParam Long idCourse,
+                                         @RequestParam Long idInstructor,
+                                         Instructor instructor,
+                                         ModelMap modelMap){
+
+        courseController.addInstructorToCourse(idInstructor,idCourse);
+        modelMap.addAttribute("instructor",courseController.showInsstructorOfCourse(idCourse));
+        return "courses/courseInstructor";
+    }
+
 }

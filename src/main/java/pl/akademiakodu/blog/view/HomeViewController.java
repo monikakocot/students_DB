@@ -46,6 +46,7 @@ The new approach makes it possible to shorten this simply to:
     @GetMapping("/courses/all")
     public String allCourses(ModelMap modelMap, Courses courses){
         modelMap.addAttribute("courses", courseController.getAllCourses());
+        modelMap.addAttribute("loginForm", new LoginForm());
         return "courses/courses";
     }
     @GetMapping("/instructors/all")

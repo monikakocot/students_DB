@@ -50,6 +50,9 @@ public class Instructor {
         this.courses = courses;
     }
 
+    public String getCommunicate(){
+        return "The course has not have a Instructor :(";
+    }
 
     //CONSTRUCTORS, GETTERS,SETTERS
     public Instructor() {

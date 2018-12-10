@@ -11,13 +11,12 @@
     <h3 th:each="list : ${courses}" th:text="${list.title}"></h3>
 </div>
 
+<!--
 <div>
-
 <a href="/courses/details">Display more information about courses</a>
-    <h5>Docelowo formularz logowania aby mieć dostęp !!!</h5>
 </div>
+-->
 
-<!-- DOESNT WORK TO REDOLVE
 <div>
     <form th:action="@{/loginCourses}" th:method="post" th:object="${loginForm}">
         Login: <input type="text" th:field="*{login}">  <br/>
@@ -25,7 +24,6 @@
         <input type="submit" value="LogIn!">
     </form>
 </div>
--->
 
 </body>
 </html>
