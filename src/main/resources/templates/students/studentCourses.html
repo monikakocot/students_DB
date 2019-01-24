@@ -9,20 +9,52 @@
 <h1>Courses of student: </h1>
 <p th:text="${coursesList}"/>
 
-<h3 th:each="list : ${courses}" th:text="${list.title}"></h3>
 
+<div th:if="${info} == null">
+
+<!--<h3 th:each="list : ${courses}" th:text="${list.title}"></h3>-->
 <div>
     <h1> Add course to Student:</h1>
-
     <form th:action="@{/student/addCourse}" method="post" >
-
         <input type="number" th:name="idStudent" placeholder="idStudent">
         <br>
         <input type="number" th:name="idCourse" placeholder="idCourse">
         <br>
         <button th:type="submit">Add Course</button>
     </form>
+</div>
 
+<div>
+    <h1> Add course to Student BY NAMES:</h1>
+    <form th:action="@{/student/addCourseByName}" method="post" >
+        <select name="name">
+            <option th:each="list : ${students}" th:value="${list.name}" th:text="${list.name}"/>
+        </select>
+        <br>
+        <select name="title">
+            <option th:each="list : ${courses}" th:value="${list.title}" th:text="${list.title}"/>
+        </select>
+        <br>
+        <button th:type="submit">Add Course</button>
+    </form>
+</div>
+
+</div>
+
+<!--WITHOUT SELECT-->
+<!--<div>-->
+    <!--<h1> Add course to Student BY NAMES:</h1>-->
+    <!--<form th:action="@{/student/addCourseByName}" method="post" >-->
+        <!--<input type="text" th:name="name" placeholder="Student's name">-->
+        <!--<br>-->
+        <!--<input type="text" th:name="title" placeholder="Course's title">-->
+        <!--<br>-->
+        <!--<button th:type="submit">Add Course</button>-->
+    <!--</form>-->
+<!--</div>-->
+
+<div>
+    <a href="/">Back to HomePage</a>
 </div>
 
 </body>

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import pl.akademiakodu.blog.Repositories.StudentRepository;
+import pl.akademiakodu.blog.controllers.CourseController;
 import pl.akademiakodu.blog.controllers.StudentController;
 import pl.akademiakodu.blog.model.Courses;
 import pl.akademiakodu.blog.model.LoginForm;
@@ -21,6 +22,8 @@ public class StudentViewController {
     StudentRepository studentRepository;
     @Autowired
     StudentController studentController;
+    @Autowired
+    CourseController courseController;
 
 
     @PostMapping ("/login")
@@ -40,8 +43,8 @@ public class StudentViewController {
 
         Optional<Student> studentOptional = studentRepository.findById(id);
         studentOptional.ifPresent(result ->{
-            //result = studentOptional.get(); // ZAKOMENTOWANE W WERSJI LUKASZA
-            //result.getStudentDetails().setPhoneNumber(phoneNumber); // ZAKOMENTOWANE W WERSJI LUKASZA
+            //result = studentOptional.get(); // Version L
+            //result.getStudentDetails().setPhoneNumber(phoneNumber); // Version L
             result.getStudentDetails().setPhoneNumber(phoneNumber);
             studentRepository.save(result);
         });
@@ -74,12 +77,13 @@ public class StudentViewController {
                                ModelMap modelMap,Student student){
 
          modelMap.addAttribute("coursesList",studentController.showCoursesOfStudent(idStudent));
-
+         modelMap.addAttribute("courses", courseController.getAllCourses());
          modelMap.addAttribute("students", studentController.getAllStudents());
          return "students/studentCourses";
     }
 
-    // co ciekawe z @PathVariable zamiast @RequestParam nie działa
+    // interesting fact that with @PathVariable instead of @RequestParam does not work
+
     @PostMapping("/student/addCourse")
     public String addCourseToStudent(@RequestParam Long idStudent,
                                      @RequestParam Long idCourse,
@@ -88,6 +92,23 @@ public class StudentViewController {
 
         studentController.addCourseToStudent(idStudent,idCourse,course);
         modelMap.addAttribute("coursesList",studentController.showCoursesOfStudent(idStudent));
+        modelMap.addAttribute("message","You succeed!");
+
+        return "students/studentCourses";
+    }
+
+    @PostMapping("/student/addCourseByName")
+    public String addCourseToStudentByname(@RequestParam String name,
+                                     @RequestParam String title,
+                                     Courses course,
+                                     ModelMap modelMap){
+
+        studentController.addCourseToStudentByName(name,title,course);
+        modelMap.addAttribute("coursesList",studentController.showCoursesOfStudentByName(name));
+        modelMap.addAttribute("courses", courseController.getAllCourses());
+        modelMap.addAttribute("students", studentController.getAllStudents());
+        modelMap.addAttribute("info","You succeed!");
+
         return "students/studentCourses";
     }
 

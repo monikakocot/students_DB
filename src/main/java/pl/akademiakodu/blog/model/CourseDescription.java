@@ -14,15 +14,12 @@ public class CourseDescription {
 
 
     //CONSTRUCTORS, GETTERS,SETTERS
-
     public CourseDescription(Long id, String description) {
         this.id = id;
         this.description = description;
     }
-
     public CourseDescription() {
     }
-
     public Long getId() {
         return id;
     }

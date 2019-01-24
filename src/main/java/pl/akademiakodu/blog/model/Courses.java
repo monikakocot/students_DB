@@ -45,7 +45,7 @@ public class Courses {
 
     private List<Student> student;
 
-//LUKASZ MA @ManyToOne
+//Version L has @ManyToOne
     @JsonBackReference //  //to not show field 'instructor' in courses
     @ManyToOne(cascade = {CascadeType.PERSIST,
         CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -62,7 +62,7 @@ public class Courses {
     private CourseDescription courseDescription;
 
 
-    // W WERSJI LUKASZA
+//Version L
     public Instructor getInstructor() {
         return instructor;
     }
@@ -77,9 +77,7 @@ public class Courses {
     }
 
 
-
-
-/* ZAKOMENTOWANE W WERSJI LUKASZA
+/* //Version L
     // this for @ManyToMany
    // private List<Instructor> instructor;
     public List<Instructor> getInstructor() {

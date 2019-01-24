@@ -59,14 +59,13 @@ public class CourseViewController {
     public String showInstructor (@PathVariable Long idCourse,
                                ModelMap modelMap,Courses courses){
 
-        //DODAC OBSLUGE ZE GDY NIE MA INSTRUKTORA TO WYSWIETLA INFORMACJĘ O KONIECZNOSCI DODANIA GO
         modelMap.addAttribute("instructor",courseController.showInsstructorOfCourse(idCourse));
-
         modelMap.addAttribute("courses", courseController.getAllCourses());
+
         return "courses/courseInstructor";
     }
 
-    // co ciekawe z @PathVariable zamiast @RequestParam nie działa
+    // interesting fact that with @PathVariable instead of @RequestParam does not work
     @PostMapping("/course/addInstructor")
     public String addInstructorToCourse (@RequestParam Long idCourse,
                                          @RequestParam Long idInstructor,

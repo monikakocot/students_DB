@@ -16,6 +16,8 @@ public class CourseController {
 
     @Autowired
     CoursesRepository coursesRepository;
+    @Autowired
+    InstructorRepository instructorRepository;
 
     @GetMapping("/courses/all")
     public List<Courses> getAllCourses (){
@@ -27,7 +29,7 @@ public class CourseController {
         return coursesRepository.save(courses);
     }
 
-    //WERSJA LUKASZA
+//Version L
     @PostMapping("courses/add/desc")
     public Courses addNewCourseWithDescription(@ModelAttribute Courses course,CourseDescription courseDescription) {
 
@@ -39,7 +41,7 @@ public class CourseController {
         );
         return coursesRepository.save(result);
     }
-//WERSJA LUKASZA
+//Version L
 // HERE WAS WORKING ONLY CHANGING OF ONE FIELD, ANOTHEERS ARE GIVING NULL
 //WHEN YOU CHANGE ONE FIELD E.G. phoneNumber in another fields we have null
     @PutMapping("/courses/update/{id}")
@@ -53,18 +55,14 @@ public class CourseController {
 
         return "course id:" + id + "updated!";
     }
-//WERSJA LUKASZA
-
+//Version L
     @DeleteMapping("/courses/delete/{id}")
     public String deleteCourseById(@PathVariable("id") Long id){
         coursesRepository.deleteById(id);
         return "deleted";
     }
 
-    @Autowired
-    InstructorRepository instructorRepository;
-
-    // //OD KOMENTOWANE W WERSJI LUKASZA
+//Version L
     //KOD1
     @GetMapping("/courses/{idCourse}/instructors/{idInstructor}")
     public String addInstructorToCourse(@PathVariable Long idInstructor,
@@ -124,8 +122,7 @@ public class CourseController {
     }
 */
 
-
-    /* // WERSJA LUAKSZA
+    /* //Version L
     @PostMapping("courses/add")
     public Courses addNewCourse(@ModelAttribute Courses course) {
         Courses result = new Courses();
@@ -134,7 +131,5 @@ public class CourseController {
         return coursesRepository.save(result);
     }
     */
-
-
 
 }

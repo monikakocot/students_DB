@@ -32,7 +32,7 @@ public class Instructor {
     //private Set<Courses> course;
     //KOD1
 
-    //LUKASZ MA @OneTOMany
+    //Version L has @OnetoMany
     //element mappedBy - owner of relation
     @OneToMany(mappedBy="instructor",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Courses> courses; //- here we didnt succed with adding courses to instructor

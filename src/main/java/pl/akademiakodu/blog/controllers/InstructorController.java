@@ -17,14 +17,13 @@ public class InstructorController {
 
     @Autowired
     InstructorRepository instructorRepository;
+    @Autowired
+    CoursesRepository coursesRepository;
 
     @GetMapping("/instructor/all")
     public List<Instructor> getAllInstructor(){
         return instructorRepository.findAll();
     }
-
-    @Autowired
-    CoursesRepository coursesRepository;
 
 /*
     //With @OnetToMany and @ManyToOne does not work -

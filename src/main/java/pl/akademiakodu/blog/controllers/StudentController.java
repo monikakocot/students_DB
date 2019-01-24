@@ -78,6 +78,14 @@ public class StudentController {
         return courseList;
     }
 
+    @GetMapping("/students/{name}")
+    public List<Courses> showCoursesOfStudentByName (@PathVariable String name){
+
+        Optional<Student> studentOptional = studentRepository.findByName(name);
+        List<Courses> courseList = studentOptional.get().getCourses();
+        return courseList;
+    }
+
     @GetMapping("/students/{idStudent}/course/{idCourse}")
     public String addCourseToStudent(
             @PathVariable Long idStudent,
@@ -102,6 +110,25 @@ public class StudentController {
 
     }
 
+    @GetMapping("/students/{name}/course/{title}")
+    public String addCourseToStudentByName(
+            @PathVariable String name,
+            @PathVariable String  title,
+            @ModelAttribute Courses courses
+    ){
+        Optional<Student> studentOptional = studentRepository.findByName(name);
+        Optional<Courses> courseOptional = coursesRepository.findAllByTitle(title);
+
+        studentOptional.ifPresent(result -> {
+            List<Courses> courseList = studentOptional.get().getCourses();
+
+            courseList.add(courseOptional.get());
+            result.setCourses(courseList);
+            studentRepository.save(result);
+        });
+        return "Student name: " + name + " has new Course: " + title;
+
+    }
 
        /* @PostMapping("/students/form/update/phone")
     public String updateStudentByForm(@RequestParam Long id, @RequestParam String phoneNumber) {

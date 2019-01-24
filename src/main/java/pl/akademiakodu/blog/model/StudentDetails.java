@@ -13,7 +13,7 @@ public class StudentDetails {
     @Column(name="phone_number")
     private String phoneNumber;
 
-/* LUKASZ MA DODATKOWE POLA
+/* //Version L - TODO add additional fields
     @Column(name = "register_date")
     private Date registerDate;
     @Column(name = "update_date")
