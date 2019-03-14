@@ -45,22 +45,25 @@ public class StudentController {
         return "Student from id:" + id + "deleted!";
     }
 
-   // HERE WAS WORKING ONLY CHANGING OF ONE FIELD, ANOTHEERS ARE GIVING NULL
-    //WHEN YOU CHANGE ONE FIELD E.G. phoneNumber in another fields we have null
+
     @PutMapping("/students/update/{id}")
     public String updateStudentById(@ModelAttribute Student student, @ModelAttribute StudentDetails studentDetails,
+                                    String lastname, String phoneNumber,
                                     @PathVariable Long id) {
 
-        Optional<Student> resultOptional = studentRepository.findById(id); //Entitimanager
+        Optional<Student> resultOptional = studentRepository.findById(id); //
 
-        //Student result =resultOptional.get();
+
         resultOptional.ifPresent((Student result) -> {
-
-            result.getStudentDetails().setPhoneNumber(studentDetails.getPhoneNumber());
-            result.getStudentDetails().setLastname(studentDetails.getLastname());
-
+            if(studentDetails.getPhoneNumber()!=null) {
+                result.getStudentDetails().setPhoneNumber(studentDetails.getPhoneNumber());
+            }
+            if(studentDetails.getLastname()!=null) {
+                result.getStudentDetails().setLastname(studentDetails.getLastname());
+            }
             studentRepository.save(result);
         });
+
         return "Student updated";
     }
 

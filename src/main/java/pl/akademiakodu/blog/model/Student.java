@@ -3,6 +3,7 @@ package pl.akademiakodu.blog.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class,property="id" ) //to not loop app (JSON)
 @Entity
 @Table(name = "student")
+@DynamicUpdate
 public class Student {
 
     @Id
@@ -29,7 +31,7 @@ public class Student {
 
     private List<Courses> courses;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
    // @JoinColumn(name="studen/_details_id") // with this we have dobule student_details column
     private  StudentDetails studentDetails;
 
